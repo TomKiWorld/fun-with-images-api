@@ -8,6 +8,9 @@ const register = require('./controllers/register');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
+// Solve Heroku issue
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0; 
+
 // All queries works with MySql client as well
 const database = knex({
   client: 'pg',
