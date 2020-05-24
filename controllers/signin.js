@@ -29,12 +29,12 @@ const handleSignIn = (bcrypt, database) => (req, res) => {
           .then(user => {
             res.json(user[0])
           })
-          .catch(err => res.status(400).json('Unable to sign in', err))
+          .catch(err => res.status(400).json(err))
       } else {
         throw new Error;
       }
     })
-    .catch(err => res.status(400).json('Wrong credentials', err))
+    .catch(err => res.status(400).json(err))
 }
 
 module.exports = {
