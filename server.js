@@ -8,13 +8,12 @@ const register = require('./controllers/register');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
+// All queries works with MySql client as well
 const database = knex({
-  client: 'mysql',
+  client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : 'root',
-    password : 'TomKiDataLocalBase',
-    database : 'fun-with-images'
+    host : process.env.DATABASE_URL,
+    ssl: true
   }
 });
 
