@@ -45,9 +45,9 @@ const handleRegister = (bcrypt, database) => (req, res) => {
       .then(user => {
         res.json(user[0])
       })
-      .catch(err => res.status(400).json('Could not fetch the user'))
+      .catch(err => res.status(400).json(err))
   })
-  .catch(err => res.status(400).json(err))
+  .catch(err => res.status(400).json('Unable to register'))
 }
 
 module.exports = {
