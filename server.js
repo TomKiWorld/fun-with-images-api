@@ -22,7 +22,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => { res.send(database.users); });
+app.get('/', (req, res) => { res.send('Server is running'); });
 // Sign in
 app.post('/signin', signin.handleSignIn(bcrypt, database));
 // Register a new user
