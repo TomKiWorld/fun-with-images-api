@@ -16,7 +16,6 @@ const handleRegister = (bcrypt, database) => (req, res) => {
   if (!email || !name || !password) {
     return res.status(400).json('Insufficient information - Please make sure all fields are entered')
   }
-  console.log('register');
 
   const hash = bcrypt.hashSync(password);
 
@@ -28,7 +27,6 @@ const handleRegister = (bcrypt, database) => (req, res) => {
     .into('login')
     .returning('email')
     .then(loginEmail => {
-      console.log(loginEmail);
       return trx('users')
         .returning('*')
         .insert({
@@ -37,7 +35,6 @@ const handleRegister = (bcrypt, database) => (req, res) => {
           joined: new Date()
         })
         .then(user => {
-          console.log(user);
           res.json(user[0])
         })
     })

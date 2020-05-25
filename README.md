@@ -10,13 +10,15 @@ Before you start, make sure to set up your local database, you can follow the st
 
 In **server.js** make sure to set `const productionEnv = false;` to connect to your local database during development, and deploy to master with the vaue `true` in order to connect to Heroku database.
 
-Once connection with heroku is done, make to sure to run the command `git push heroku master` after each commit to Git (You may replace master with a branch name).
+Once connection with heroku is done, make to sure to run the command `git push heroku master` after each commit to Git (You may replace master with a branch name `git push heroku branchName:master`).
 
 ### Handy links:
 
 [Heroku Deploying with Git](https://devcenter.heroku.com/articles/git)
 
 [Heroku Connecting in Node.js](https://devcenter.heroku.com/articles/heroku-postgresql#connecting-in-node-js)
+
+[Heroku Deploying from a branch besides master](https://devcenter.heroku.com/articles/git#deploying-from-a-branch-besides-master)
 
 ## Available Scripts
 
@@ -66,6 +68,10 @@ Once you are dne setting up your app in heroku and added the add-on for postgreS
 `heroku pg:info` to see connection info.
 
 `heroku pg:psql` to enter edit mode, from here follow steps 5 to 7 from local setup.
+
+Other commands:
+
+`heroku logs --tail` to connect to Heroku server and see logs.
 
 **Don't forget to add the Visitor profile!!**
 
