@@ -8,17 +8,29 @@ const register = require('./controllers/register');
 const profile = require('./controllers/profile');
 const image = require('./controllers/image');
 
-// Solve Heroku issue
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0; 
+const localDB = knex({
+  client: 'pg',
+  connection: {
+  host : '127.0.0.1',
+  user : '',
+  password : '',
+  database : 'fun-with-images'
+  }
+});
 
-// All queries works with MySql client as well
-const database = knex({
+const prodDB = knex({
   client: 'pg',
   connection: {
     connectionString : process.env.DATABASE_URL,
     ssl: true
   }
 });
+
+// Set to false during local development 
+const productionEnv = true;
+const database = productionEnv ? prodDB : localDB;
+// Solve Heroku issue during local development not to be used on production
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 const app = express();
 app.use(express.json());

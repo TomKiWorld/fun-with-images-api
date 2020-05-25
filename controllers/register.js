@@ -12,11 +12,12 @@
  */
 const handleRegister = (bcrypt, database) => (req, res) => {
   const { email, name, password } = req.body;
-  const hash = bcrypt.hashSync(password);
 
   if (!email || !name || !password) {
     return res.status(400).json('Insufficient information - Please make sure all fields are entered')
   }
+
+  const hash = bcrypt.hashSync(password);
 
   database.transaction(trx => {
     trx.insert({
@@ -24,28 +25,21 @@ const handleRegister = (bcrypt, database) => (req, res) => {
       email: email
     })
     .into('login')
-    .then(data => {
+    .returning('email')
+    .then(loginEmail => {
       return trx('users')
+        .returning('*')
         .insert({
-          email: email,
+          email: loginEmail[0],
           name: name,
           joined: new Date()
         })
         .then(user => {
-          return user[0];
+          res.json(user[0])
         })
     })
     .then(trx.commit)
     .catch(trx.rollback)
-  })
-  .then(id => {
-    return database.select('*')
-      .from('users')
-      .where('id', '=', id)
-      .then(user => {
-        res.json(user[0])
-      })
-      .catch(err => res.status(400).json(err))
   })
   .catch(err => res.status(400).json('Unable to register'))
 }
