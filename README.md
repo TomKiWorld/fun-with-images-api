@@ -1,6 +1,6 @@
-# 🥳Fun with images API🥳
+# 🥳 Fun with images API 🥳
 
-Server configuration to manage the database for my Fun with images project.
+Server configuration to manage the database for my [Fun with images](https://github.com/TomKiWorld/fun-with-images) project.
 
 Run `npm install` to download all packages
 
@@ -51,9 +51,11 @@ Since we use free hosting from Heroku we will use postgreSQL
 
 8. Other commands: 
 
-`\d` to see all table; `\q` to quit the service; and then `brew services stop postgresql` to stop the service.
+`\d` to see all table; `\q` to quit the service;
 
-**Most importent**: Once you have a databse connection, create the visitor account which is mendetory for the 'Log in as visitor' Button on the login page!
+`brew services start postgresql` to start the serviceand then `brew services stop postgresql` to stop the service.
+
+**Most importent**: Once you have established a databse connection, create the visitor account which is mendetory for the 'Log in as visitor' Button on the login page!
 
 Name: 'Visitor'
 
