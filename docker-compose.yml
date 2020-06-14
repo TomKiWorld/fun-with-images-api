@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+    
+  # Backend API
+  fun-with-images-api:
+    container_name: backend
+    build: ./
+    volumes:
+      - ./:/usr/src/fun-with-images-api
+    command: npm run dev
+    working_dir: /usr/src/fun-with-images-api
+    ports:
+      - "3000:3000"
+    env_file: .env
+  
+  # PostgreSQL
+  postgres:
+    build: ./postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: fun-with-images-docker
+    ports:
+      - "5432:5432"
