@@ -1,0 +1,9 @@
+BEGIN TRANSACTION;
+
+CREATE TABLE images (
+  id serial PRIMARY KEY UNIQUE NOT NULL, 
+  url TEXT NOT NULL, 
+  userid int NOT NULL
+);
+
+COMMIT;

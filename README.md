@@ -2,36 +2,28 @@
 
 Server configuration to manage the database for my [Fun with images](https://github.com/TomKiWorld/fun-with-images) project.
 
-Run `npm install` to download all packages
-
 ## Important notes
 
-Before you start, make sure to set up your local database, you can follow the steps below to set it up with brew.
+Before you start, make sure to set up your local data by copying the `.env-example` and setting your credentials.
 
-In **server.js** make sure to set `const productionEnv = false;` to connect to your local database during development, and deploy to master with the vaue `true` in order to connect to Heroku database.
+In **server.js** make sure to set `const productionEnv = '';` to to local or docker to connect to your correct local database during development, and deploy to master with an empty value in order to connect to Heroku (or ant other) database.
 
 Once connection with heroku is done, make to sure to run the command `git push heroku master` after each commit to Git (You may replace master with a branch name `git push heroku branchName:master`).
 
-### Handy links:
+## Local setup with Docker compose
 
-[Heroku Deploying with Git](https://devcenter.heroku.com/articles/git)
+To set up locally with Docker simply run `docker-compose up --build` and Docker will set up local env with a server and database with two users to test with.
 
-[Heroku Connecting in Node.js](https://devcenter.heroku.com/articles/heroku-postgresql#connecting-in-node-js)
+## Using setup in your own environment
+### Server setup
+Run `npm install` to download all packages.
 
-[Heroku Deploying from a branch besides master](https://devcenter.heroku.com/articles/git#deploying-from-a-branch-besides-master)
+`npm start` To run the app.
 
-## Available Scripts
+`npm run-script dev` To run the app in development mode with nodemon, the server will listen to changes and restart every time changes are save.
 
-In the project directory, you can run:
-
-### `npm start`
-To run the app on node
-
-### `npm run-script dev`
-To run the app in development mode with nodemon, the server will listen to changes and restart every time changes are save.
-
-## Local database
-Since we use free hosting from Heroku we will use postgreSQL
+### Local database setup
+Since we use postgreSQL:
 
 1. `brew install postgresql` to install postgreSQL via brew.
 2. `brew services start postgresql` to start the service.
@@ -77,5 +69,13 @@ Other commands:
 
 **Don't forget to add the Visitor profile!!**
 
+---
+## Heroku handy links:
+
+[Heroku Deploying with Git](https://devcenter.heroku.com/articles/git)
+
+[Heroku Connecting in Node.js](https://devcenter.heroku.com/articles/heroku-postgresql#connecting-in-node-js)
+
+[Heroku Deploying from a branch besides master](https://devcenter.heroku.com/articles/git#deploying-from-a-branch-besides-master)
 
 ## 🤗Most important - Have fun!!🤗
