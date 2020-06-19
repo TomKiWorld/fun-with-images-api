@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const auth = require('./controllers/authorization');
 const signin = require('./controllers/signin');
 const register = require('./controllers/register');
 const profile = require('./controllers/profile');
@@ -55,21 +56,23 @@ app.use(cors());
 
 app.get('/', (req, res) => { res.send('<h1>The fun with images server is running</h1><p>Made with <span>&hearts;</span> by <a href=\'https://github.com/TomKiWorld\' target=\'_blank\' rel=\'noopener noreferrer\'>TomKiWorld</a></p>'); });
 // Sign in
-app.post('/signin', signin.handleSignIn(bcrypt, database));
+app.post('/signin', signin.signinAuthentication(bcrypt, database));
 // Register a new user
 app.post('/register', register.handleRegister(bcrypt, database));
 // Get profile
-app.get('/profile/:id', profile.getProfile(database));
+app.get('/profile/:id', auth.requireAuth, profile.handleProfileGet(database));
+// Update profile
+app.post('/profile/:id', auth.requireAuth, profile.handleProfileUpdate(database));
 // Remove profile and images
-app.post('/profile-removal/:id', profile.handleRemoval(database));
+app.post('/profile-removal/:id', auth.requireAuth, profile.handleRemoval(database));
 // Get previously submitted images
-app.get('/profile-images/:id', profile.getProfileImages(database));
+app.get('/profile-images/:id', auth.requireAuth, profile.getProfileImages(database));
 // Update image entries and add image to database
-app.put('/image', image.increaseImages(database));
+app.put('/image', auth.requireAuth, image.increaseImages(database));
 // Use Clarifai to find colors in image
-app.post('/image-colors', image.handleColorApiCall);
+app.post('/image-colors', auth.requireAuth, image.handleColorApiCall);
 // Use Clarifai to find faces in image
-app.post('/image-faces', image.handleFacesApiCall);
+app.post('/image-faces', auth.requireAuth, image.handleFacesApiCall);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`app is running on port ${process.env.PORT}`);
