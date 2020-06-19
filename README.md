@@ -1,18 +1,23 @@
 # 🥳 Fun with images API 🥳
 
-Server configuration to manage the database for my [Fun with images](https://github.com/TomKiWorld/fun-with-images) project.
+## Usage
+- Server configuration to manage the database for my [Fun with images](https://github.com/TomKiWorld/fun-with-images) project.
+- This App connects to the [Clarifai](https://www.clarifai.com/) API to detect colors and faces in images.
+- Uses JWT Tokens and Redis to manage sessions and Authorization to access database. 
 
 ## Important notes
 
 Before you start, make sure to set up your local data by copying the `.env-example` and setting your credentials.
 
-In **server.js** make sure to set `const productionEnv = '';` to to local or docker to connect to your correct local database during development, and deploy to master with an empty value in order to connect to Heroku (or ant other) database.
+In **server.js** make sure to set `const productionEnv = '';` to to local or docker to connect to the correct local database during development, and deploy to master with an empty value in order to connect to Heroku (or any other) server.
 
 Once connection with heroku is done, make to sure to run the command `git push heroku master` after each commit to Git (You may replace master with a branch name `git push heroku branchName:master`).
 
 ## Local setup with Docker compose
 
 To set up locally with Docker simply run `docker-compose up --build` and Docker will set up local env with a server and database with two users to test with.
+
+To make sure everything runs as expected, it is advised to run `docker-compose down` first to avoid issues during setup.
 
 ## Using setup in your own environment
 ### Server setup
@@ -31,7 +36,7 @@ Since we use postgreSQL:
 4. `psql 'fun-with-images'` to start creating tables.
 5. Users table: 
 
-`CREATE TABLE users (id serial PRIMARY KEY UNIQUE NOT NULL, name VARCHAR(100) NOT NULL, email VARCHAR(255) UNIQUE NOT NULL, entries bigint DEFAULT 0, joined TIMESTAMP NOT NULL );`
+`CREATE TABLE users (id serial PRIMARY KEY UNIQUE NOT NULL, name VARCHAR(100) NOT NULL, email VARCHAR(255) UNIQUE NOT NULL, entries bigint DEFAULT 0, avatar VARCHAR(100) DEFAULT 'avatarOne',joined TIMESTAMP NOT NULL );`
 
 6. Login table: 
 
