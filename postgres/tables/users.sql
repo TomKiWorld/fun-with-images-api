@@ -4,7 +4,8 @@ CREATE TABLE users (
   id serial PRIMARY KEY UNIQUE NOT NULL, 
   name VARCHAR(100) NOT NULL, 
   email VARCHAR(255) UNIQUE NOT NULL, 
-  entries bigint DEFAULT 0, 
+  entries bigint DEFAULT 0,
+  avatar VARCHAR(100) DEFAULT 'avatarOne', 
   joined TIMESTAMP NOT NULL 
 );
 
