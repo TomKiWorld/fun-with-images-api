@@ -95,7 +95,7 @@ const handleRemoval = (database) => (req, res) => {
     res.status(400).json('Insufficient information - Unable to remove profile')
   }
 
-  if ((email !== 'visitor@gmail.com') || (email !== 'tester@gmail.com') ) {
+  if ((email !== 'visitor@gmail.com') && (email !== 'tester@gmail.com') ) {
     database.transaction(trx => {
       trx('users')
       .where('id', id)
