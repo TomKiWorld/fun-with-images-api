@@ -17,7 +17,7 @@ const handleColorApiCall = (req,res) => {
   }
 
   clarifaiApi.models
-  .predict(clarifai.COLOR_MODEL, req.body.input)
+  .predict(clarifai.COLOR_MODEL, input)
   .then(data => res.json(data))
   .catch(err=> res.status(400).json('Unable to handle color API'));
 }
@@ -31,13 +31,13 @@ const handleColorApiCall = (req,res) => {
  */
 const handleFacesApiCall = (req,res) => {
   const {input} = req.body;
-
+  
   if (!input) {
     return res.status(400).json('Insufficient information - Unable to handle faces API');
   }
 
   clarifaiApi.models
-  .predict(clarifai.FACE_DETECT_MODEL, req.body.input)
+  .predict(clarifai.FACE_DETECT_MODEL, input)
   .then(data => res.json(data))
   .catch(err=> res.status(400).json('Unable to handle faces API'));
 }
