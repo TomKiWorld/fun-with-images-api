@@ -1,5 +1,8 @@
 # 🥳 Fun with images API 🥳
 
+## Preview
+https://fierce-oasis-21316.herokuapp.com
+
 ## Usage
 - Server configuration to manage the database for my [Fun with images](https://github.com/TomKiWorld/fun-with-images) project.
 - This App connects to the [Clarifai](https://www.clarifai.com/) API to detect colors and faces in images.
